@@ -1,0 +1,489 @@
+<!DOCTYPE html><html lang="ru"><head>
+<meta charset="utf-8">
+<title>Market Monitor — учебный стенд</title>
+<style>
+ body{font-family:Arial,Helvetica,sans-serif;margin:24px;color:#1a1a1a;background:#fafafa}
+ h1{font-size:20px;margin:0 0 4px}
+ .sub{color:#666;font-size:13px;margin-bottom:16px}
+ table{border-collapse:collapse;width:100%;background:#fff}
+ th,td{border:1px solid #e2e2e8;padding:6px 10px;font-size:13px;text-align:right}
+ th{background:#f0f0f5;text-align:center}
+ td.t,td.n,td.s{text-align:left}
+ .up{color:#1a7f4b}.down{color:#b3261e}
+ #spinner{padding:40px;text-align:center;color:#888}
+ #cookie{position:fixed;left:0;right:0;bottom:0;background:#222;color:#fff;padding:16px;
+         display:flex;gap:12px;align-items:center;justify-content:center;font-size:13px}
+ #cookie button{padding:8px 16px;border:0;border-radius:4px;cursor:pointer}
+ #more{margin:16px 0;padding:10px 18px;border:0;border-radius:4px;background:#3355cc;color:#fff;
+       font-size:14px;cursor:pointer}
+</style>
+</head>
+<body>
+
+
+<h1 data-testid="page-title">Market Monitor</h1>
+<div class="sub" data-testid="profile-line">профиль: <span id="profile">startups</span> · вариант <span id="variant">15</span></div>
+
+
+<div id="app" data-testid="app">
+    <table data-testid="market-table">
+      <thead><tr><th>#</th><th>Тикер</th><th>Название</th><th>Сектор</th><th>Цена</th>
+      <th>24ч</th><th>Объём</th><th>Капитализация</th><th>Листинг</th></tr></thead>
+      <tbody>
+    <tr data-testid="asset-row" data-rank="1" data-sector="FinTech">
+      <td class="t" data-testid="rank">1</td>
+      <td class="t" data-testid="ticker">Arvo</td>
+      <td class="n" data-testid="name">Arvo Asset</td>
+      <td class="s" data-testid="sector">FinTech</td>
+      <td data-testid="price">$150.99</td>
+      <td data-testid="change" class="up">+7,89%</td>
+      <td data-testid="volume">344.4M</td>
+      <td data-testid="mcap">2.55B</td>
+      <td data-testid="listed">05.03.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="2" data-sector="HealthTech">
+      <td class="t" data-testid="rank">2</td>
+      <td class="t" data-testid="ticker">Brixel</td>
+      <td class="n" data-testid="name">Brixel Asset</td>
+      <td class="s" data-testid="sector">HealthTech</td>
+      <td data-testid="price">$240.04</td>
+      <td data-testid="change" class="down">−6,51%</td>
+      <td data-testid="volume">1.58B</td>
+      <td data-testid="mcap">99.94B</td>
+      <td data-testid="listed">14.06.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="3" data-sector="EdTech">
+      <td class="t" data-testid="rank">3</td>
+      <td class="t" data-testid="ticker">Corvus</td>
+      <td class="n" data-testid="name">Corvus Asset</td>
+      <td class="s" data-testid="sector">EdTech</td>
+      <td data-testid="price">$720.76</td>
+      <td data-testid="change" class="up">+5,53%</td>
+      <td data-testid="volume">1.27B</td>
+      <td data-testid="mcap">82.51B</td>
+      <td data-testid="listed">01.12.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="4" data-sector="LogTech">
+      <td class="t" data-testid="rank">4</td>
+      <td class="t" data-testid="ticker">Dalta</td>
+      <td class="n" data-testid="name">Dalta Asset</td>
+      <td class="s" data-testid="sector">LogTech</td>
+      <td data-testid="price">$93.14</td>
+      <td data-testid="change" class="up">+4,02%</td>
+      <td data-testid="volume">965.6M</td>
+      <td data-testid="mcap">50.12B</td>
+      <td data-testid="listed">03.02.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="5" data-sector="AgroTech">
+      <td class="t" data-testid="rank">5</td>
+      <td class="t" data-testid="ticker">Elmyr</td>
+      <td class="n" data-testid="name">Elmyr Asset</td>
+      <td class="s" data-testid="sector">AgroTech</td>
+      <td data-testid="price">$457.19</td>
+      <td data-testid="change" class="down">−3,05%</td>
+      <td data-testid="volume">2.79B</td>
+      <td data-testid="mcap">179.92B</td>
+      <td data-testid="listed">02.04.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="6" data-sector="RetailTech">
+      <td class="t" data-testid="rank">6</td>
+      <td class="t" data-testid="ticker">Fenra</td>
+      <td class="n" data-testid="name">Fenra Asset</td>
+      <td class="s" data-testid="sector">RetailTech</td>
+      <td data-testid="price">$312.91</td>
+      <td data-testid="change" class="down">−7,68%</td>
+      <td data-testid="volume">2.11B</td>
+      <td data-testid="mcap">47.90B</td>
+      <td data-testid="listed">07.10.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="7" data-sector="FinTech">
+      <td class="t" data-testid="rank">7</td>
+      <td class="t" data-testid="ticker">Glide</td>
+      <td class="n" data-testid="name">Glide Asset</td>
+      <td class="s" data-testid="sector">FinTech</td>
+      <td data-testid="price">$860.30</td>
+      <td data-testid="change" class="down">−1,86%</td>
+      <td data-testid="volume">1.50B</td>
+      <td data-testid="mcap">129.23B</td>
+      <td data-testid="listed">26.12.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="8" data-sector="HealthTech">
+      <td class="t" data-testid="rank">8</td>
+      <td class="t" data-testid="ticker">Hexon</td>
+      <td class="n" data-testid="name">Hexon Asset</td>
+      <td class="s" data-testid="sector">HealthTech</td>
+      <td data-testid="price">n/a</td>
+      <td data-testid="change" class="down">−1,59%</td>
+      <td data-testid="volume">3.50B</td>
+      <td data-testid="mcap">195.07B</td>
+      <td data-testid="listed">16.02.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="9" data-sector="EdTech">
+      <td class="t" data-testid="rank">9</td>
+      <td class="t" data-testid="ticker">Ionis</td>
+      <td class="n" data-testid="name">Ionis Asset</td>
+      <td class="s" data-testid="sector">EdTech</td>
+      <td data-testid="price">$730.06</td>
+      <td data-testid="change" class="up">+1,11%</td>
+      <td data-testid="volume">2.46B</td>
+      <td data-testid="mcap">222.70B</td>
+      <td data-testid="listed">11.08.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="10" data-sector="LogTech">
+      <td class="t" data-testid="rank">10</td>
+      <td class="t" data-testid="ticker">Juno</td>
+      <td class="n" data-testid="name">Juno Asset</td>
+      <td class="s" data-testid="sector">LogTech</td>
+      <td data-testid="price">$652.45</td>
+      <td data-testid="change" class="down">−9,73%</td>
+      <td data-testid="volume">1.59B</td>
+      <td data-testid="mcap">176.05B</td>
+      <td data-testid="listed">20.09.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="11" data-sector="AgroTech">
+      <td class="t" data-testid="rank">11</td>
+      <td class="t" data-testid="ticker">Karbo</td>
+      <td class="n" data-testid="name">Karbo Asset</td>
+      <td class="s" data-testid="sector">AgroTech</td>
+      <td data-testid="price">$666.50</td>
+      <td data-testid="change" class="down">−2,14%</td>
+      <td data-testid="volume">3.36B</td>
+      <td data-testid="mcap">123.80B</td>
+      <td data-testid="listed">27.11.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="12" data-sector="RetailTech">
+      <td class="t" data-testid="rank">12</td>
+      <td class="t" data-testid="ticker">Lumen</td>
+      <td class="n" data-testid="name">Lumen Asset</td>
+      <td class="s" data-testid="sector">RetailTech</td>
+      <td data-testid="price">$172.22</td>
+      <td data-testid="change" class="up">+7,91%</td>
+      <td data-testid="volume">2.12B</td>
+      <td data-testid="mcap">60.15B</td>
+      <td data-testid="listed">12.04.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="13" data-sector="FinTech">
+      <td class="t" data-testid="rank">13</td>
+      <td class="t" data-testid="ticker">Mirex</td>
+      <td class="n" data-testid="name">Mirex Asset</td>
+      <td class="s" data-testid="sector">FinTech</td>
+      <td data-testid="price">$369.60</td>
+      <td data-testid="change" class="up">+4,39%</td>
+      <td data-testid="volume">1.18B</td>
+      <td data-testid="mcap">6.41B</td>
+      <td data-testid="listed">12.05.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="14" data-sector="HealthTech">
+      <td class="t" data-testid="rank">14</td>
+      <td class="t" data-testid="ticker">Nuvo</td>
+      <td class="n" data-testid="name">Nuvo Asset</td>
+      <td class="s" data-testid="sector">HealthTech</td>
+      <td data-testid="price">$658.65</td>
+      <td data-testid="change" class="up">—</td>
+      <td data-testid="volume">2.43B</td>
+      <td data-testid="mcap">19.53B</td>
+      <td data-testid="listed">09.06.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="15" data-sector="EdTech">
+      <td class="t" data-testid="rank">15</td>
+      <td class="t" data-testid="ticker">Orbis</td>
+      <td class="n" data-testid="name">Orbis Asset</td>
+      <td class="s" data-testid="sector">EdTech</td>
+      <td data-testid="price">$439.37</td>
+      <td data-testid="change" class="up">+12,70%</td>
+      <td data-testid="volume">1.28B</td>
+      <td data-testid="mcap">97.91B</td>
+      <td data-testid="listed">11.11.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="16" data-sector="LogTech">
+      <td class="t" data-testid="rank">16</td>
+      <td class="t" data-testid="ticker">Prisma</td>
+      <td class="n" data-testid="name">Prisma Asset</td>
+      <td class="s" data-testid="sector">LogTech</td>
+      <td data-testid="price">$11.75</td>
+      <td data-testid="change" class="down">−7,48%</td>
+      <td data-testid="volume">542.2M</td>
+      <td data-testid="mcap">5.39B</td>
+      <td data-testid="listed">01.12.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="17" data-sector="AgroTech">
+      <td class="t" data-testid="rank">17</td>
+      <td class="t" data-testid="ticker">Qubit</td>
+      <td class="n" data-testid="name">Qubit Asset</td>
+      <td class="s" data-testid="sector">AgroTech</td>
+      <td data-testid="price">$575.80</td>
+      <td data-testid="change" class="down">−9,22%</td>
+      <td data-testid="volume">1.19B</td>
+      <td data-testid="mcap">105.74B</td>
+      <td data-testid="listed">15.01.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="18" data-sector="RetailTech">
+      <td class="t" data-testid="rank">18</td>
+      <td class="t" data-testid="ticker">Ravel</td>
+      <td class="n" data-testid="name">Ravel Asset</td>
+      <td class="s" data-testid="sector">RetailTech</td>
+      <td data-testid="price">$631.52</td>
+      <td data-testid="change" class="down">−8,51%</td>
+      <td data-testid="volume">434.2M</td>
+      <td data-testid="mcap">49.52B</td>
+      <td data-testid="listed">08.06.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="19" data-sector="FinTech">
+      <td class="t" data-testid="rank">19</td>
+      <td class="t" data-testid="ticker">Sygma</td>
+      <td class="n" data-testid="name">Sygma Asset</td>
+      <td class="s" data-testid="sector">FinTech</td>
+      <td data-testid="price">$478.91</td>
+      <td data-testid="change" class="up">+2,64%</td>
+      <td data-testid="volume">86.1M</td>
+      <td data-testid="mcap">382.9M</td>
+      <td data-testid="listed">15.06.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="20" data-sector="HealthTech">
+      <td class="t" data-testid="rank">20</td>
+      <td class="t" data-testid="ticker">Terra</td>
+      <td class="n" data-testid="name">Terra Asset</td>
+      <td class="s" data-testid="sector">HealthTech</td>
+      <td data-testid="price">$417.96</td>
+      <td data-testid="change" class="up">+8,24%</td>
+      <td data-testid="volume">262.4M</td>
+      <td data-testid="mcap">10.60B</td>
+      <td data-testid="listed">20.07.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="21" data-sector="EdTech">
+      <td class="t" data-testid="rank">21</td>
+      <td class="t" data-testid="ticker">Ultis</td>
+      <td class="n" data-testid="name">Ultis Asset</td>
+      <td class="s" data-testid="sector">EdTech</td>
+      <td data-testid="price">$748.68</td>
+      <td data-testid="change" class="down">−7,72%</td>
+      <td data-testid="volume">25.7M</td>
+      <td data-testid="mcap">562.9M</td>
+      <td data-testid="listed">03.11.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="22" data-sector="LogTech">
+      <td class="t" data-testid="rank">22</td>
+      <td class="t" data-testid="ticker">Vento</td>
+      <td class="n" data-testid="name">Vento Asset</td>
+      <td class="s" data-testid="sector">LogTech</td>
+      <td data-testid="price">$871.06</td>
+      <td data-testid="change" class="up">+10,76%</td>
+      <td data-testid="volume">3.53B</td>
+      <td data-testid="mcap">384.66B</td>
+      <td data-testid="listed">27.11.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="23" data-sector="AgroTech">
+      <td class="t" data-testid="rank">23</td>
+      <td class="t" data-testid="ticker">Wexa</td>
+      <td class="n" data-testid="name">Wexa Asset</td>
+      <td class="s" data-testid="sector">AgroTech</td>
+      <td data-testid="price">$185.11</td>
+      <td data-testid="change" class="down">−0,31%</td>
+      <td data-testid="volume">736.0K</td>
+      <td data-testid="mcap">74.8M</td>
+      <td data-testid="listed">22.11.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="24" data-sector="RetailTech">
+      <td class="t" data-testid="rank">24</td>
+      <td class="t" data-testid="ticker">Xenia</td>
+      <td class="n" data-testid="name">Xenia Asset</td>
+      <td class="s" data-testid="sector">RetailTech</td>
+      <td data-testid="price">$790.83</td>
+      <td data-testid="change" class="down">−8,93%</td>
+      <td data-testid="volume">2.14B</td>
+      <td data-testid="mcap">84.93B</td>
+      <td data-testid="listed">22.03.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="25" data-sector="FinTech">
+      <td class="t" data-testid="rank">25</td>
+      <td class="t" data-testid="ticker">Yotta</td>
+      <td class="n" data-testid="name">Yotta Asset</td>
+      <td class="s" data-testid="sector">FinTech</td>
+      <td data-testid="price">$288.21</td>
+      <td data-testid="change" class="down">−7,11%</td>
+      <td data-testid="volume">691.2M</td>
+      <td data-testid="mcap">57.69B</td>
+      <td data-testid="listed">10.03.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="26" data-sector="HealthTech">
+      <td class="t" data-testid="rank">26</td>
+      <td class="t" data-testid="ticker">Zephy</td>
+      <td class="n" data-testid="name">Zephy Asset</td>
+      <td class="s" data-testid="sector">HealthTech</td>
+      <td data-testid="price">$777.26</td>
+      <td data-testid="change" class="up">+13,15%</td>
+      <td data-testid="volume">984.1M</td>
+      <td data-testid="mcap">32.23B</td>
+      <td data-testid="listed">22.03.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="27" data-sector="EdTech">
+      <td class="t" data-testid="rank">27</td>
+      <td class="t" data-testid="ticker">Astra</td>
+      <td class="n" data-testid="name">Astra Asset</td>
+      <td class="s" data-testid="sector">EdTech</td>
+      <td data-testid="price">$757.98</td>
+      <td data-testid="change" class="up">+11,86%</td>
+      <td data-testid="volume">176.9M</td>
+      <td data-testid="mcap">8.42B</td>
+      <td data-testid="listed">12.07.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="28" data-sector="LogTech">
+      <td class="t" data-testid="rank">28</td>
+      <td class="t" data-testid="ticker">Borea</td>
+      <td class="n" data-testid="name">Borea Asset</td>
+      <td class="s" data-testid="sector">LogTech</td>
+      <td data-testid="price">$530.36</td>
+      <td data-testid="change" class="down">−2,99%</td>
+      <td data-testid="volume">1.5M</td>
+      <td data-testid="mcap">70.4M</td>
+      <td data-testid="listed">17.06.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="29" data-sector="AgroTech">
+      <td class="t" data-testid="rank">29</td>
+      <td class="t" data-testid="ticker">Ceres</td>
+      <td class="n" data-testid="name">Ceres Asset</td>
+      <td class="s" data-testid="sector">AgroTech</td>
+      <td data-testid="price">$394.42</td>
+      <td data-testid="change" class="up">+0,61%</td>
+      <td data-testid="volume">5.8M</td>
+      <td data-testid="mcap">430.3M</td>
+      <td data-testid="listed">19.06.2021</td>
+    </tr>
+    <tr data-testid="asset-row" data-rank="30" data-sector="RetailTech">
+      <td class="t" data-testid="rank">30</td>
+      <td class="t" data-testid="ticker">Dione</td>
+      <td class="n" data-testid="name">Dione Asset</td>
+      <td class="s" data-testid="sector">RetailTech</td>
+      <td data-testid="price">$650.13</td>
+      <td data-testid="change" class="up">+6,65%</td>
+      <td data-testid="volume">2.15B</td>
+      <td data-testid="mcap">97.47B</td>
+      <td data-testid="listed">27.09.2021</td>
+    </tr></tbody></table></div>
+<button id="more" data-testid="load-more" style="display: none;">Показать ещё</button>
+<div id="status" data-testid="status">Показано 30 из 30</div>
+
+<script>
+// ------- параметры стенда: профиль и вариант приходят в query-строке -----------------
+const qs = new URLSearchParams(location.search);
+const VARIANT = parseInt(qs.get("variant") || "30", 10);
+const PROFILE = qs.get("profile") || "crypto";
+const DELAY = parseInt(qs.get("delay") || "1200", 10);   // задержка «гидратации»
+const PAGE_SIZE = 12, TOTAL = 30;
+
+// ------- детерминированный генератор: у каждого варианта свои числа -------------------
+function rng(seed){ let s = seed * 9301 + 49297; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+const rnd = rng(VARIANT * 7 + PROFILE.length);
+
+const NAMES = {
+  crypto:   ["BTC","ETH","SOL","TON","XRP","ADA","AVAX","DOT","LINK","MATIC","ATOM","NEAR","APT","ARB","OP",
+             "FIL","ICP","IMX","INJ","SUI","AAVE","GRT","RUNE","SAND","EGLD","FTM","ALGO","HBAR","VET","THETA"],
+  stocks:   ["SBER","GAZP","LKOH","GMKN","YNDX","ROSN","NVTK","TATN","MGNT","MTSS","PLZL","ALRS","CHMF","NLMK","PHOR",
+             "AFLT","VTBR","RUAL","SNGS","IRAO","FEES","HYDR","MOEX","POLY","TRNF","UPRO","OZON","FIVE","SMLT","AGRO"],
+  metals:   ["Li","Co","Ni","Cu","Al","Zn","Pb","Sn","W","Mo","Ti","V","Mn","Cr","Si","Mg","REE-Nd","REE-Pr","Pd","Pt",
+             "Au","Ag","U","Ga","Ge","In","Ta","Nb","Bi","Sb"],
+  ecom:     ["SKU-1001","SKU-1002","SKU-1003","SKU-1004","SKU-1005","SKU-1006","SKU-1007","SKU-1008","SKU-1009","SKU-1010",
+             "SKU-1011","SKU-1012","SKU-1013","SKU-1014","SKU-1015","SKU-1016","SKU-1017","SKU-1018","SKU-1019","SKU-1020",
+             "SKU-1021","SKU-1022","SKU-1023","SKU-1024","SKU-1025","SKU-1026","SKU-1027","SKU-1028","SKU-1029","SKU-1030"],
+  startups: ["Arvo","Brixel","Corvus","Dalta","Elmyr","Fenra","Glide","Hexon","Ionis","Juno","Karbo","Lumen","Mirex",
+             "Nuvo","Orbis","Prisma","Qubit","Ravel","Sygma","Terra","Ultis","Vento","Wexa","Xenia","Yotta","Zephy",
+             "Astra","Borea","Ceres","Dione"],
+};
+const SECTORS = {
+  crypto:   ["L1","L2","DeFi","Infra","GameFi","Stablecoin"],
+  stocks:   ["Финансы","Нефть и газ","Металлургия","Ритейл","Технологии","Энергетика"],
+  metals:   ["Аккумуляторные","Базовые","Редкоземельные","Драгоценные","Легирующие","Ядерные"],
+  ecom:     ["Смартфоны","Ноутбуки","ТВ","Бытовая техника","Аксессуары","Аудио"],
+  startups: ["FinTech","HealthTech","EdTech","LogTech","AgroTech","RetailTech"],
+};
+const CUR = {crypto:"$", stocks:"₽", metals:"$", ecom:"₽", startups:"$"};
+
+function fmtMoney(x, cur){
+  if (cur === "₽"){ return x.toLocaleString("ru-RU", {minimumFractionDigits:2, maximumFractionDigits:2}) + " ₽"; }
+  return "$" + x.toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function fmtSuffix(x){
+  if (x >= 1e9) return (x/1e9).toFixed(2) + "B";
+  if (x >= 1e6) return (x/1e6).toFixed(1) + "M";
+  if (x >= 1e3) return (x/1e3).toFixed(1) + "K";
+  return x.toFixed(0);
+}
+function fmtPct(p){
+  const sign = p >= 0 ? "+" : "\u2212";                  // намеренно Unicode-минус
+  return sign + Math.abs(p).toFixed(2).replace(".", (VARIANT % 2 ? "," : ".")) + "%";
+}
+
+const names = NAMES[PROFILE] || NAMES.crypto;
+const sectors = SECTORS[PROFILE] || SECTORS.crypto;
+const cur = CUR[PROFILE] || "$";
+const DATA = [];
+for (let i = 0; i < TOTAL; i++){
+  const price = Math.round((0.5 + rnd() * 900) * 100) / 100;
+  const vol = Math.round(1e4 + rnd() ** 3 * 4e9);
+  const mcap = Math.round(vol * (3 + rnd() * 120));
+  const chg = Math.round((rnd() * 24 - 10) * 100) / 100;
+  const date = new Date(2021, Math.floor(rnd() * 12), 1 + Math.floor(rnd() * 27));
+  DATA.push({
+    rank: i + 1,
+    ticker: names[i % names.length],
+    name: names[i % names.length] + " " + (PROFILE === "ecom" ? "модель" : "Asset"),
+    sector: sectors[i % sectors.length],
+    price: (i === 7) ? "n/a" : fmtMoney(price, cur),          // «грязное» значение
+    change: (i === 13) ? "—" : fmtPct(chg),                   // пропуск
+    volume: fmtSuffix(vol),
+    mcap: fmtSuffix(mcap),
+    listed: date.toLocaleDateString("ru-RU"),
+    price_num: (i === 7) ? null : price,
+    chg_num: (i === 13) ? null : chg / 100,
+    vol_num: vol, mcap_num: mcap,
+  });
+}
+window.__MARKET__ = DATA;                                     // запасной канал для офлайн-режима
+
+let shown = 0;
+function render(){
+  const rows = DATA.slice(0, shown).map(d => `
+    <tr data-testid="asset-row" data-rank="${d.rank}" data-sector="${d.sector}">
+      <td class="t" data-testid="rank">${d.rank}</td>
+      <td class="t" data-testid="ticker">${d.ticker}</td>
+      <td class="n" data-testid="name">${d.name}</td>
+      <td class="s" data-testid="sector">${d.sector}</td>
+      <td data-testid="price">${d.price}</td>
+      <td data-testid="change" class="${d.chg_num >= 0 ? "up" : "down"}">${d.change}</td>
+      <td data-testid="volume">${d.volume}</td>
+      <td data-testid="mcap">${d.mcap}</td>
+      <td data-testid="listed">${d.listed}</td>
+    </tr>`).join("");
+  document.getElementById("app").innerHTML = `
+    <table data-testid="market-table">
+      <thead><tr><th>#</th><th>Тикер</th><th>Название</th><th>Сектор</th><th>Цена</th>
+      <th>24ч</th><th>Объём</th><th>Капитализация</th><th>Листинг</th></tr></thead>
+      <tbody>${rows}</tbody></table>`;
+  document.getElementById("status").textContent = `Показано ${shown} из ${TOTAL}`;
+  document.getElementById("more").style.display = shown < TOTAL ? "inline-block" : "none";
+}
+
+function boot(){
+  document.getElementById("profile").textContent = PROFILE;
+  document.getElementById("variant").textContent = VARIANT;
+  document.getElementById("spinner").remove();
+  shown = PAGE_SIZE;
+  render();
+}
+setTimeout(boot, DELAY);                                      // «гидратация» с задержкой
+
+document.getElementById("more").addEventListener("click", () => {
+  const btn = document.getElementById("more");
+  btn.disabled = true; btn.textContent = "Загрузка…";
+  setTimeout(() => {                                          // подгрузка тоже не мгновенная
+    shown = Math.min(shown + PAGE_SIZE, TOTAL);
+    render();
+    btn.disabled = false; btn.textContent = "Показать ещё";
+  }, 700);
+});
+document.getElementById("accept").addEventListener("click", () => document.getElementById("cookie").remove());
+document.getElementById("reject").addEventListener("click", () => document.getElementById("cookie").remove());
+</script>
+
+
+</body></html>
