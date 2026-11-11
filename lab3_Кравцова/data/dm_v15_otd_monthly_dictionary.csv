@@ -1,0 +1,7 @@
+поле,тип в pandas,тип в DataLens,пример
+month,object,Дата,2017-01-01
+region,object,Строка,Север
+delivered_orders,int64,Целое число,17
+on_time_orders,int64,Целое число,17
+late_orders,int64,Целое число,0
+late_days_sum,float64,Дробное число,0.0
